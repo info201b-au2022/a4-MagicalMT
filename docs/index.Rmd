@@ -1,7 +1,7 @@
 ---
-title: "Your A4 Report Title (TODO: Revise title)"
-author: "Your Name"
-date: '2022-11-01'
+title: "A brief analysis of the U.S. prison population"
+author: "Simon Xiong"
+date: '2022-11-22'
 output: html_document
 ---
 
@@ -12,34 +12,41 @@ source("../source/analysis.R")
 
 ## Abstract 
 [TODO: Include a short abstract (about 50 words)]
-
-# Test (TODO: Remove before submission!!)
-```{r echo=FALSE}
-q1_string <- test_query1()
-num <- 5
-```
-As you know, this is a markdown report. The [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) is **useful!**
-
-* Here's a test of a dynamic variable. Say **"`r q1_string`!!!** 
-* Here's another test. A vector
-of numbers: `r test_query2(num)`.
-
-Recall that _{r echo=TRUE}_ can be used to display the code, 
-which is very useful when developing and debugging a report. Here's an example: 
-
-```{r echo=TRUE}
-num <- 5
-sum <- sum(test_query2(num))
-print(sum)
-```
+The number of different races in U.S. prisons has always been one of the key criteria for everyone to discuss racism, so is prison racism in the U.S. still strong? Or has it improved considerably? This is an important question for us to discuss.
 
 ## Introduction 
-[TODO]
+This dataset[Incarceration Trends Dataset]https://github.com/vera-institute/incarceration-trends 
+presents a table of the number of different races, genders, and other categories in U.S. prisons. The breakdown according to different counties in different states helps us to effectively study whether there are social problems in U.S. prisons.
+
+The direct stakeholders affected by this dataset are current inmates, suspects awaiting trial, and members of the legal department. Indirect stakeholders are all U.S. citizens. In my opinion, although prison racism has begun to improve in recent years, there is still a strong level of prison racism in many states.
 
 ## Data Summary 
-[TODO]
+I found very interesting data based on the last 2018 in the dataset as a standard, based on the total number of blacks in prison as a percentage of all people. According to the calculations, in 2018, DC (Washington D.C.) had the highest percentage of blacks in prison of all states, as much as `r highest_black_proportion_2018()`%. ID (Idaho) had the lowest percentage of people, with only `r lowest_black_proportion_2018()`%. The average percentage of each state is `r mean_black_proportion_2018()`%. Reflecting the fact that each state is not very equal in terms of ethnicity.
 
-[TODO ... other sections ... See Canvas for details]
+## Growth of the U.S. Prison Population
+```{r echo=FALSE, eval=TRUE, message=FALSE}
+plot_jail_pop_for_us()
+```
+  This chart shows a histogram of the number of people in prison in total from 1970 to 2018, and we can see that there was a period of rapid increase between 1980 and 2010, and a much flatter period at both ends.
 
-_All the very best with your work!_
+## Growth of Prison Population by State 
+```{r echo=FALSE, eval=TRUE, message=FALSE}
+plot_jail_pop_by_states(c("WA", "OR", "CA", "ID", "DC"))
+```
+  This chart shows the change in prison population in each state from 1970 to 2018, with CA remaining high and trending upward, and the remaining states rising slightly, but still relatively stable.
 
+## <variable comparison that reveals potential patterns of inequality>
+```{r echo=FALSE, eval=TRUE, message=FALSE}
+plot_black_by_states_2018()
+```  
+*Is there a serious prison racial problem situation in each state? Which states have the most severe?*  
+
+According to the chart, we can clearly see that the percentage of black prisons in some states is over fifty percent, which is far higher than the percentage of the black community in the total number of people in the United States. In Washington, D.C., it even exceeds 90%, which means that some states still have racial discrimination in prisons.
+
+## <a map shows potential patterns of inequality that vary geographically>
+```{r echo=FALSE, eval=TRUE, message=FALSE}
+plot_2018_male_by_states()
+```  
+*Is there gender discrimination in prisons within each state?*  
+
+In the chart, we find that in the southern region, the percentage of male prison population is significantly higher compared to the back region, and that the more developed areas along the coast have higher male prison population.
